@@ -471,7 +471,15 @@ export const CampaignFormData = {
             files_url: {
                 type: 'string',
                 title: 'Images'
-            }
+            },
+            medias: {
+                type: 'array',
+                title: 'Promoto channel',
+                items: {
+                    type: 'object'
+                    // 可以根据你的媒体对象结构补充 properties
+                }
+            },
         }
     },
     ui_schema: {
@@ -498,12 +506,91 @@ export const CampaignFormData = {
         },
         end_at: {
             'ui:widget': 'date'
-        }
+        },
+        medias: {
+            'ui:widget': 'medias'
+        },
     },
     form_data: {
         name: '',
         category: '',
         description: '',
         people: 0
+    }
+};
+
+export const MediaFormData = {
+    json_schema: {
+        type: 'object',
+        title: 'Edit Media',
+        description: '',
+        required: ['name'],
+        properties: {
+            name: {
+                type: 'string',
+                title: 'Media Name'
+            },
+            description: {
+                type: 'string',
+                title: 'Description'
+            },
+            category: {
+                type: 'string',
+                title: 'Media Type',
+                oneOf: [
+                    { title: 'Newspaper', const: 'newspaper' },
+                    { title: 'Magazine', const: 'magazine' },
+                ]
+            },
+            industry: {
+                type: 'string',
+                title: 'Industry'
+            },
+            region: {
+                type: 'string',
+                title: 'Region'
+            },
+            city: {
+                type: 'string',
+                title: 'City'
+            },
+            tags: {
+                type: 'array',
+                title: 'Tag',
+                items: {
+                    type: 'string'
+                    // 可以根据你的媒体对象结构补充 properties
+                }
+            },
+        }
+    },
+    ui_schema: {
+        name: {
+            'ui:widget': 'text'
+        },
+        description: {
+            'ui:widget': 'textarea'
+        },
+        category: {
+            'ui:widget': 'select'
+        },
+        industry: {
+            'ui:widget': 'text'
+        },
+        region: {
+            'ui:widget': 'text'
+        },
+        city: {
+            'ui:widget': 'text'
+        },
+        tags: {
+            'ui:widget': 'tag'
+        },
+
+    },
+    form_data: {
+        name: '',
+        category: '',
+        description: '',
     }
 };

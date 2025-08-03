@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment } from 'react';
 // https://headlessui.com/react/dialog
 
 type IModal = {
@@ -26,6 +26,9 @@ export default function Modal({
     closable = false,
     overflowVisible = false
 }: IModal) {
+    const hasBg = className?.includes('bg');
+    const hasP = className?.includes('p');
+
     return (
         <Transition appear show={isShow} as={Fragment}>
             <Dialog as="div" className={`relative z-10 ${wrapperClassName}`} onClose={onClose}>
@@ -59,7 +62,7 @@ export default function Modal({
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel
-                                className={`w-full max-w-md transform ${overflowVisible ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ${className}`}
+                                className={`w-full max-w-md transform ${overflowVisible ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl ${hasBg ? '' : 'bg-white'} ${hasP ? '' : 'p-6'} text-left align-middle shadow-xl transition-all ${className}`}
                             >
                                 {title && (
                                     <Dialog.Title

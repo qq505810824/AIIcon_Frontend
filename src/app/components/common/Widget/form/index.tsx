@@ -10,6 +10,8 @@ import FormEditor from './FormEditor';
 import FormFilesWidget from './FormFilesWidget';
 import FormFileWidget from './FormFileWidget';
 import FormImage from './FormImage';
+import FormMediasWidget from './FormMediasWidget';
+import FormTagWidget from './FormTagWidget';
 
 const theme = extendTheme({});
 
@@ -90,6 +92,8 @@ export default function FormDetailView(props: ViewProps) {
                             editor: FormEditor,
                             image: (props) => FormImage({ ...props, storage: storageName }),
                             file: FormFileWidget,
+                            medias: FormMediasWidget,
+                            tag: FormTagWidget,
                             files: (props) =>
                                 FormFilesWidget({ ...props, uploadFiles, setUploadFiles })
                         }}

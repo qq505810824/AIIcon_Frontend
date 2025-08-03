@@ -3,7 +3,7 @@
 import Loading from '@/app/components/base/loading';
 import { useAppContext } from '@/context/app-context';
 import { useCampaignData } from '@/hooks/useCampaignData';
-import CampaginsView from './CampaignsView';
+import CampaignsView from './CampaignsView';
 
 export default function CampaignsContainter() {
     const { user_id } = useAppContext();
@@ -14,7 +14,7 @@ export default function CampaignsContainter() {
     if (isLoading) return <Loading type="app" />;
     return (
         <>
-            <CampaginsView
+            <CampaignsView
                 {...{
                     handleRefresh,
                     campaigns: data

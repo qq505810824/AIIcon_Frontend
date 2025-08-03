@@ -29,7 +29,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 };
 
 export const metadata = {
-    title: 'Community AI'
+    title: 'AIIcon Ultra'
 };
 
 export default Layout;

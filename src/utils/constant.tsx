@@ -414,6 +414,12 @@ export const AdminMeuns = [
         icon: <DvrIcon sx={{ color: '#eeeeee' }} className="w-5 text-[#eeeeee]" />,
         items: []
     },
+    {
+        name: 'Media列表',
+        href: '/admin/medias',
+        icon: <DvrIcon sx={{ color: '#eeeeee' }} className="w-5 text-[#eeeeee]" />,
+        items: []
+    },
     // {
     //     name: '表單列表',
     //     href: '/admin/forms',
