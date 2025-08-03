@@ -7,7 +7,7 @@ import type { Viewport } from 'next';
 import './styles/globals.css';
 
 export const metadata = {
-    title: 'Community AI'
+    title: 'AIIcon Ultra'
 };
 
 export const viewport: Viewport = {

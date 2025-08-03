@@ -15,7 +15,7 @@ const LogoSite: FC<LogoSiteProps> = ({ className }) => {
                     router.push('/');
                 }}
             >
-                Community AI
+                AIIcon Ultra
             </p>
         </>
         // <img

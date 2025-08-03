@@ -1,6 +1,6 @@
 const translation = {
     pageTitle: "Hey, let's get started!👋",
-    welcome: 'Welcome to Community AI, please log in to continue.',
+    welcome: 'Welcome to AIIcon Ultra, please log in to continue.',
     email: 'Email address',
     emailPlaceholder: 'Your email',
     password: 'Password',
@@ -21,7 +21,7 @@ const translation = {
     invitationCodePlaceholder: 'Your invitation code',
     interfaceLanguage: 'Interface Language',
     timezone: 'Time zone',
-    go: 'Go to Community AI',
+    go: 'Go to AIIcon Ultra',
     sendUsMail: "Email us your introduction, and we'll handle the invitation request.",
     acceptPP: 'I have read and accept the privacy policy',
     reset: 'Please run following command to reset your password',
@@ -45,14 +45,14 @@ const translation = {
             'Password must contain letters and numbers, and the length must be greater than 8'
     },
     license: {
-        tip: 'Before starting Community AI Community Edition, read the GitHub',
+        tip: 'Before starting AIIcon Ultra Community Edition, read the GitHub',
         link: 'Open-source License'
     },
     join: 'Join',
     joinTipStart: 'Invite you join',
-    joinTipEnd: 'team on Community AI',
+    joinTipEnd: 'team on AIIcon Ultra',
     invalid: 'The link has expired',
-    explore: 'Explore Community AI',
+    explore: 'Explore AIIcon Ultra',
     activatedTipStart: 'You have joined the',
     activatedTipEnd: 'team',
     activated: 'Sign in now',
