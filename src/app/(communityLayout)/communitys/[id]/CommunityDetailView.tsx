@@ -57,6 +57,10 @@ export default function CommunityDetailView({ community }: ViewProps) {
                 return <ChannelContainter />;
         }
     };
+    const onClickNumbers = () => {
+        router.push(`/communitys/${community.id}/numbers`)
+    }
+
     if (!community) return <Loading type="app" />;
     return (
         <>
@@ -77,7 +81,7 @@ export default function CommunityDetailView({ community }: ViewProps) {
                                 <h1 className="text-xl sm:text-3xl font-bold">
                                     {community?.name || '--'}
                                 </h1>
-                                <p className="text-gray-400 text-opacity-90">
+                                <p onClick={onClickNumbers} className="text-gray-400 text-opacity-90 hover:underline cursor-pointer hover:text-gold-400">
                                     {community?.accounts_count} members
                                 </p>
                             </div>

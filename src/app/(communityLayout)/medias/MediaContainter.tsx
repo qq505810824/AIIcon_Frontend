@@ -11,10 +11,7 @@ interface ViewProps {
     hasSelectedMedias?: MediaModel[];
 }
 
-export default function MediasContainter({
-    onConfirm,
-    hasSelectedMedias
-}: ViewProps) {
+export default function MediasContainter({ onConfirm, hasSelectedMedias }: ViewProps) {
     const { user_id } = useAppContext();
     const { data, isLoading, isError, mutate } = useMediaData({});
     const handleRefresh = () => {

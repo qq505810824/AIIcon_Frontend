@@ -29,7 +29,7 @@ const MediaCreateContainer = () => {
         // }
         // // console.log('upload_file_urls', upload_file_urls);
         const newFormData = {
-            ...formData,
+            ...formData
             // user: localStorage?.getItem('user_id') || null
         };
         // // console.log(_.omit(newFormData, 'uploadFiles'));

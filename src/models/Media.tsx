@@ -1,4 +1,3 @@
-
 export interface MediaModel {
     id?: number;
     name: string;
@@ -10,12 +9,9 @@ export interface MediaModel {
     city?: string;
     category: string;
     tags?: string[];
-    meta?: {}
-
+    meta?: {};
 
     uploadFiles?: File[];
-
-
 
     created_at?: string;
     updated_at?: string;

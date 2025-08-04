@@ -5,10 +5,15 @@ interface ViewProps {
     medias: MediaModel[];
     handleRefresh?: any;
     selectedMedias: any[];
-    onToggleCampaign: any
+    onToggleCampaign: any;
 }
 
-export default function MediasLayout({ medias, selectedMedias = [], onToggleCampaign, handleRefresh }: ViewProps) {
+export default function MediasLayout({
+    medias,
+    selectedMedias = [],
+    onToggleCampaign,
+    handleRefresh
+}: ViewProps) {
     return (
         <>
             <div className="grid grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

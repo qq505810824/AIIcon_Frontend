@@ -51,7 +51,7 @@ export default function Modal({
                         e.stopPropagation();
                     }}
                 >
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <div className="flex h-full items-center justify-center p-4 text-center">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -62,7 +62,7 @@ export default function Modal({
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel
-                                className={`w-full max-w-md transform ${overflowVisible ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl ${hasBg ? '' : 'bg-white'} ${hasP ? '' : 'p-6'} text-left align-middle shadow-xl transition-all ${className}`}
+                                className={`w-full   max-w-md transform ${overflowVisible ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl ${hasBg ? '' : 'bg-white'} ${hasP ? '' : 'p-6'} text-left align-middle shadow-xl transition-all ${className}`}
                             >
                                 {title && (
                                     <Dialog.Title

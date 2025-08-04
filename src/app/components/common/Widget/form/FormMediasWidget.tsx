@@ -12,7 +12,6 @@ export default function FormMediasWidget(props: any) {
         // console.log('formData', name);
         // console.log('value', value);
         if (value) {
-
         }
     }, [value]);
 
@@ -27,22 +26,26 @@ export default function FormMediasWidget(props: any) {
         // onChange && onChange(medias); // 通知表单
         // const ids = medias.map(m => m.id);
         // onChange && onChange(ids); // 只保存 id 数组
-        const idNameArr = medias.map(m => ({ id: m.id, name: m.name, city: m.city }));
+        const idNameArr = medias.map((m) => ({ id: m.id, name: m.name, city: m.city }));
         onChange && onChange(idNameArr); // 只保存 id 和 name 数组
         setShowModal(false);
     };
 
     return (
         <div>
-            <div className='flex flex-row items-center justify-between'>
+            <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row items-center">
-                    <label className="block text-md font-medium text-[#1a202c]">{props.label}</label>
+                    <label className="block text-md font-medium text-[#1a202c]">
+                        {props.label}
+                    </label>
                     {required && (
                         <label className="block text-md font-medium text-[#e53e3e] ml-2">*</label>
                     )}
                 </div>
                 <div onClick={onAddMedia}>
-                    <label className='underline text-blue-500 cursor-pointer'>+ Add From Media Database</label>
+                    <label className="underline text-blue-500 cursor-pointer">
+                        + Add From Media Database
+                    </label>
                 </div>
             </div>
 
@@ -62,7 +65,7 @@ export default function FormMediasWidget(props: any) {
                     }, {})
                 ).map(([city, medias], index) => (
                     <div key={city} className="text-sm text-gray-700">
-                        {index + 1}.   {city}, {medias.length} media channel
+                        {index + 1}. {city}, {medias.length} media channel
                     </div>
                 ))}
             </div>
@@ -71,14 +74,16 @@ export default function FormMediasWidget(props: any) {
             {showModal && (
                 <Modal
                     isShow={showModal}
-                    className="!w-full !max-w-full !h-full !rounded-none p-0"
-                    wrapperClassName="z-50 "
+                    className="!w-full !max-w-full h-[80%] !rounded-none p-0"
+                    wrapperClassName="z-50 h-[80%]"
                     onClose={() => setShowModal(false)}
                 >
-                    <MediasContainter
-                        onConfirm={handleConfirmMedias}
-                        hasSelectedMedias={selectedMedias}
-                    />
+                    <div className="h-full overflow-y-auto">
+                        <MediasContainter
+                            onConfirm={handleConfirmMedias}
+                            hasSelectedMedias={selectedMedias}
+                        />
+                    </div>
                 </Modal>
             )}
         </div>

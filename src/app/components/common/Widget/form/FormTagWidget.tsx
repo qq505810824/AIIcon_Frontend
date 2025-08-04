@@ -8,11 +8,10 @@ export default function FormTagWidget(props: any) {
 
     useEffect(() => {
         if (value) {
-            setTags(value)
+            setTags(value);
         }
         // console.log('value', value, tags);
-
-    }, [value, tags])
+    }, [value, tags]);
 
     const handleChange = (newTags: string[]) => {
         setTags(newTags);
@@ -21,7 +20,7 @@ export default function FormTagWidget(props: any) {
 
     return (
         <div>
-            <div className='flex flex-row items-center justify-between mb-2'>
+            <div className="flex flex-row items-center justify-between mb-2">
                 <div className="flex flex-row items-center">
                     <label className="block text-md font-medium text-[#1a202c]">{label}</label>
                     {required && (

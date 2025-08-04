@@ -13,7 +13,6 @@ export const getAllApps = async (options?: any) => {
 
         let query = supabase.from(db).select('*');
 
-
         if (options && options.category) {
             query = query.eq('category', options.category);
         }
@@ -188,7 +187,6 @@ export const updateApp = async (id: number, appData: Partial<MediaModel>) => {
 
 export const deleteApp = async (id: number, community_id?: number) => {
     try {
-
         const { data, error } = await supabase.from(db).delete().eq('id', id);
 
         if (error) {

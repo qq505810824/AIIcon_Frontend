@@ -52,7 +52,7 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
         'yellow', // yellow
         'indigo', // indigo
         'pink', // pink
-        'slate' // slate
+        // 'slate' // slate
     ];
 
     const onSubmit = async (e: React.FormEvent) => {

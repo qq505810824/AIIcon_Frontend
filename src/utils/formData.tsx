@@ -479,7 +479,7 @@ export const CampaignFormData = {
                     type: 'object'
                     // 可以根据你的媒体对象结构补充 properties
                 }
-            },
+            }
         }
     },
     ui_schema: {
@@ -509,7 +509,7 @@ export const CampaignFormData = {
         },
         medias: {
             'ui:widget': 'medias'
-        },
+        }
     },
     form_data: {
         name: '',
@@ -539,7 +539,7 @@ export const MediaFormData = {
                 title: 'Media Type',
                 oneOf: [
                     { title: 'Newspaper', const: 'newspaper' },
-                    { title: 'Magazine', const: 'magazine' },
+                    { title: 'Magazine', const: 'magazine' }
                 ]
             },
             industry: {
@@ -561,7 +561,7 @@ export const MediaFormData = {
                     type: 'string'
                     // 可以根据你的媒体对象结构补充 properties
                 }
-            },
+            }
         }
     },
     ui_schema: {
@@ -585,12 +585,11 @@ export const MediaFormData = {
         },
         tags: {
             'ui:widget': 'tag'
-        },
-
+        }
     },
     form_data: {
         name: '',
         category: '',
-        description: '',
+        description: ''
     }
 };

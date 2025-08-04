@@ -4,7 +4,6 @@ import { faBriefcase, faCheck, faMapMarkerAlt, faTags } from '@fortawesome/free-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/navigation';
 
-
 interface ViewProps {
     media: MediaModel;
     isAdded?: boolean;
@@ -28,9 +27,7 @@ export default function MediaCard({ media, isAdded, onToggleCampaign }: ViewProp
             finish: 'bg-red-300 text-white'
         }[status] || 'bg-blue-400 text-white';
 
-    const onAddToCampaign = () => {
-
-    }
+    const onAddToCampaign = () => {};
 
     return (
         <>
@@ -78,17 +75,15 @@ export default function MediaCard({ media, isAdded, onToggleCampaign }: ViewProp
                             ))}
                         </span>
                     </div>
-                    <div className='flex mt-4'>
+                    <div className="flex mt-4">
                         <button
                             className={`w-full ${isAdded ? 'bg-gray-400' : 'bg-gold-400 hover:bg-gold-500'} text-white text-sm px-4 py-2 rounded-lg`}
-                            onClick={e => {
+                            onClick={(e) => {
                                 e.stopPropagation();
                                 onToggleCampaign && onToggleCampaign(media.id);
                             }}
                         >
-                            {isAdded && (
-                                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                            )}
+                            {isAdded && <FontAwesomeIcon icon={faCheck} className="mr-2" />}
                             {isAdded ? 'Selected' : 'Add to Campaign'}
                         </button>
                     </div>

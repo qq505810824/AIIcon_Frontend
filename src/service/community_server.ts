@@ -115,7 +115,7 @@ export const getAppDetail = async (id: number, accountId?: string) => {
         // 构建查询任务数组
         const tasks = [
             // supabase.rpc('increment_view', { row_id: id }),
-            supabase.from(db).select('*').eq('id', id).single()
+            supabase.from(db).select('*,owner(id,name,avatar)').eq('id', id).single()
         ];
 
         // 如果有用户ID，添加收藏状态查询
@@ -175,6 +175,18 @@ export const createApp = async (appData: Omit<CommunityModel, 'id'>) => {
             throw error;
         }
 
+        // 2. 创建 account_community 关系
+        if (data && data.length > 0) {
+            const communityId = data[0].id;
+            const accountId = appData.owner;
+            const { error: relError } = await supabase
+                .from('account_community')
+                .insert([{ account: accountId, community: communityId }]);
+            if (relError) {
+                throw relError;
+            }
+        }
+
         return { success: true, data };
     } catch (error) {
         console.error('创建应用失败:', error);
@@ -215,6 +227,16 @@ export const updateApp = async (id: number, appData: Partial<CommunityModel>) =>
 
 export const deleteApp = async (id: number) => {
     try {
+        // 先删除关系表中的数据
+        // const { error: relError } = await supabase
+        //     .from('account_community')
+        //     .delete()
+        //     .eq('community', id);
+
+        // if (relError) {
+        //     throw relError;
+        // }
+
         const { data, error } = await supabase.from(db).delete().eq('id', id);
 
         if (error) {
