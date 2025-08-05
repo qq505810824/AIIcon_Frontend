@@ -37,11 +37,9 @@ export const getAllApps = async (options?: any) => {
         const { data, error } = await query;
         console.log(contacts);
 
-        const members = data?.map(item => ({
+        const members = data?.map((item) => ({
             ...item,
-            is_followed: contacts?.some(
-                c => c.account === item.account.id
-            )
+            is_followed: contacts?.some((c) => c.account === item.account.id)
         }));
 
         if (error) {

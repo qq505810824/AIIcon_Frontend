@@ -58,7 +58,7 @@ export default function MediaView({
     };
     return (
         <>
-            <div className="flex-1 p-6  bg-gray-800 text-white ">
+            <div className="flex-1 p-6  bg-gray-900 text-white ">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex justify-between items-center  flex-wrap space-y-2 mb-8">
                         <div className=" ">

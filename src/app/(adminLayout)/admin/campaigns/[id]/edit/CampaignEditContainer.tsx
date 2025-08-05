@@ -66,7 +66,7 @@ const CampaignEditContainer = () => {
                     title: '更新成功！',
                     type: 'success'
                 });
-                router.push('/admin/Campaigns');
+                router.push('/admin/campaigns');
                 // router.back()
             }
         } catch (error) {

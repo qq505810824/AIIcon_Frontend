@@ -1,7 +1,7 @@
 import Loading from '@/app/components/base/loading';
 import { CommunityModel } from '@/models/Community';
 import { ArrowBack } from '@mui/icons-material';
-import { BookOpen, Calendar as CalendarIcon, Hash } from 'lucide-react';
+import { BookOpen, Calendar as CalendarIcon, Hash, Users } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import ChannelDetailContainter from '../../channels/[id]/ChannelDetailContainter';
@@ -58,8 +58,8 @@ export default function CommunityDetailView({ community }: ViewProps) {
         }
     };
     const onClickNumbers = () => {
-        router.push(`/communitys/${community.id}/numbers`)
-    }
+        router.push(`/communitys/${community.id}/numbers`);
+    };
 
     if (!community) return <Loading type="app" />;
     return (
@@ -70,18 +70,31 @@ export default function CommunityDetailView({ community }: ViewProps) {
                     className={`bg-gradient-to-r from-${community?.theme}-500 to-${community?.theme}-600`}
                 >
                     <div className="max-w-7xl mx-auto px-2 py-4 sm:px-6 sm:py-8">
-                        <div className="flex items-center space-x-2 mb-6">
-                            <button onClick={() => router.push('/')} className="p-2 rounded-lg">
-                                <ArrowBack className="w-5 h-5 hover:text-gold-400  " />
-                            </button>
-                            <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-xl sm:text-2xl">
-                                {community?.logo || '💪'}
-                            </div>
-                            <div>
+                        <div className="flex flex-row items-center justify-between">
+                            <div className="flex items-center space-x-2 mb-6">
+                                <button onClick={() => router.push('/')} className="p-2 rounded-lg">
+                                    <ArrowBack className="w-5 h-5 hover:text-gold-400  " />
+                                </button>
+                                <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-xl sm:text-2xl">
+                                    {community?.logo || '💪'}
+                                </div>
                                 <h1 className="text-xl sm:text-3xl font-bold">
                                     {community?.name || '--'}
                                 </h1>
-                                <p onClick={onClickNumbers} className="text-gray-400 text-opacity-90 hover:underline cursor-pointer hover:text-gold-400">
+                            </div>
+                            <div>
+                                <button
+                                    onClick={onClickNumbers}
+                                    className="flex items-center text-gray-400 text-opacity-90 hover:underline cursor-pointer hover:text-gold-400 bg-transparent border-none p-0"
+                                    style={{ background: 'none' }}
+                                >
+                                    <Users className="w-6 h-6 mr-2 text-gold-400" />
+                                    <span>({community?.accounts_count})</span>
+                                </button>
+                                <p
+                                    onClick={onClickNumbers}
+                                    className="hidden text-gray-400 text-opacity-90 hover:underline cursor-pointer hover:text-gold-400"
+                                >
                                     {community?.accounts_count} members
                                 </p>
                             </div>

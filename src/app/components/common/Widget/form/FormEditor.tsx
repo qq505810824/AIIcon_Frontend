@@ -26,6 +26,12 @@ export default function FormEditor(props: any) {
             setInitValue(value);
             setIsInit(true);
         }
+        if (value == null) {
+            console.log('value', value);
+
+            setInitValue('');
+            onChange('');
+        }
     }, [value, isInit]);
 
     return (
@@ -110,7 +116,7 @@ export default function FormEditor(props: any) {
                             /(data:image\/jpeg;base64,)+/g,
                             'data:image/jpeg;base64,'
                         );
-                        onChange(newContent);
+                        onChange(newContent || '');
                         // setValue(newContent);
                     }}
                 />

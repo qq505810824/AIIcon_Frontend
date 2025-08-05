@@ -6,7 +6,7 @@ export interface CampaignModel {
     description: string;
     cover_url?: string;
 
-    press_release?: string;
+    press_release: string;
     files_url?: string;
 
     category: string;
@@ -23,7 +23,7 @@ export interface CampaignModel {
 
     uploadFiles?: File[];
 
-    medias?: [];
+    medias: [];
 
     created_at?: string;
     updated_at?: string;

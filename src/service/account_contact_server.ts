@@ -44,9 +44,7 @@ export const getAllApps = async (options?: any) => {
 
 export const createApp = async (appData: any) => {
     try {
-        const tasks = [
-            supabase.from(db).insert([appData]).select()
-        ];
+        const tasks = [supabase.from(db).insert([appData]).select()];
 
         const [createResult] = await Promise.all(tasks);
         // console.log('collectResult', collectResult);
@@ -66,8 +64,11 @@ export const createApp = async (appData: any) => {
 
 export const deleteApp = async (owner: string, account: string) => {
     try {
-
-        const { data, error } = await supabase.from(db).delete().eq('owner', owner).eq('account', account);
+        const { data, error } = await supabase
+            .from(db)
+            .delete()
+            .eq('owner', owner)
+            .eq('account', account);
 
         if (error) {
             throw error;

@@ -16,16 +16,18 @@ interface ViewProps {
 
 export default function NumbersContainter({ onConfirm, hasSelectedMedias }: ViewProps) {
     const { user_id } = useAppContext();
-    const { appData } = useAppDetailContext()
-    const param = useParams()
-    const { data, isLoading, isError, mutate } = useAccountCommunityData({ currentUserId: user_id, community_id: param['id'] });
+    const { appData } = useAppDetailContext();
+    const param = useParams();
+    const { data, isLoading, isError, mutate } = useAccountCommunityData({
+        currentUserId: user_id,
+        community_id: param['id']
+    });
     const handleRefresh = () => {
         mutate();
     };
     useEffect(() => {
         console.log('data', data);
-
-    }, [data])
+    }, [data]);
     if (isLoading) return <Loading type="app" />;
     return (
         <>

@@ -8,18 +8,14 @@ interface ViewProps {
     products: AccountCommunityModel[];
 }
 
-export default function NumbersContainter({
-    handleRefresh,
-    products,
-}: ViewProps) {
+export default function NumbersContainter({ handleRefresh, products }: ViewProps) {
     const router = useRouter();
-    const { appData } = useAppDetailContext()
+    const { appData } = useAppDetailContext();
 
     return (
         <>
             <div className="flex-1 p-6   ">
                 <div className="max-w-7xl mx-auto">
-
                     <div className="flex items-center space-x-2 mb-6">
                         <button onClick={() => router.back()} className="p-2 rounded-lg">
                             <ArrowBack className="w-5 h-5 hover:text-gold-400  " />
@@ -32,9 +28,13 @@ export default function NumbersContainter({
                     <div>
                         {/* <NumberItem account={appData?.owner} isOwner={true} /> */}
                         {products?.map((product, index) => (
-                            <NumberItem key={index} account={product.account} is_followed={product.is_followed} isOwner={appData?.owner?.id == product?.account?.id} />
+                            <NumberItem
+                                key={index}
+                                account={product.account}
+                                is_followed={product.is_followed}
+                                isOwner={appData?.owner?.id == product?.account?.id}
+                            />
                         ))}
-
                     </div>
                 </div>
             </div>

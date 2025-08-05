@@ -9,9 +9,11 @@ export default function FormMediasWidget(props: any) {
 
     // console.log('props', props);
     useEffect(() => {
-        // console.log('formData', name);
-        // console.log('value', value);
-        if (value) {
+        if (value == null) {
+            setSelectedMedias([]);
+            onChange && onChange([]);
+        } else {
+            setSelectedMedias(value);
         }
     }, [value]);
 
@@ -27,7 +29,7 @@ export default function FormMediasWidget(props: any) {
         // const ids = medias.map(m => m.id);
         // onChange && onChange(ids); // 只保存 id 数组
         const idNameArr = medias.map((m) => ({ id: m.id, name: m.name, city: m.city }));
-        onChange && onChange(idNameArr); // 只保存 id 和 name 数组
+        onChange && onChange(idNameArr || []); // 只保存 id 和 name 数组
         setShowModal(false);
     };
 
@@ -74,7 +76,7 @@ export default function FormMediasWidget(props: any) {
             {showModal && (
                 <Modal
                     isShow={showModal}
-                    className="!w-full !max-w-full h-[80%] !rounded-none p-0"
+                    className="!w-full !max-w-full h-[80%]  p-0 border border-gold-400/20 rounded-lg"
                     wrapperClassName="z-50 h-[80%]"
                     onClose={() => setShowModal(false)}
                 >

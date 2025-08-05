@@ -51,7 +51,7 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
         'teal', // teal
         'yellow', // yellow
         'indigo', // indigo
-        'pink', // pink
+        'pink' // pink
         // 'slate' // slate
     ];
 

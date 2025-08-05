@@ -515,7 +515,9 @@ export const CampaignFormData = {
         name: '',
         category: '',
         description: '',
-        people: 0
+        press_release: '',
+        people: 0,
+        medias: []
     }
 };
 
