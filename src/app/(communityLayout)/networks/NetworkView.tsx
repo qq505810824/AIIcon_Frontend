@@ -2,7 +2,7 @@ import NetworkLayoutView from '@/app/components/community/networks/NetworkLayout
 import { useState } from 'react';
 interface ViewProps {
     handleRefresh: () => void;
-    data: any
+    data: any;
 }
 
 export default function NetworkView({ handleRefresh, data }: ViewProps) {

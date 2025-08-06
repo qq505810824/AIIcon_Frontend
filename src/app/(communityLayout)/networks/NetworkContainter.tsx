@@ -16,9 +16,8 @@ export default function NetworkContainter() {
     useEffect(() => {
         if (data) {
             console.log('statis data', data);
-
         }
-    }, [data])
+    }, [data]);
     if (isLoading) return <Loading type="app" />;
     return (
         <>

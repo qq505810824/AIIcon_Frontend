@@ -43,7 +43,7 @@ export const useContactStatisticsData = (options?: any) => {
         {
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
-            dedupingInterval: 20000, // 1分钟内不重复请求 
+            dedupingInterval: 20000 // 1分钟内不重复请求
         }
     );
     return {

@@ -12,6 +12,12 @@ export default function NumbersContainter({ handleRefresh, products }: ViewProps
     const router = useRouter();
     const { appData } = useAppDetailContext();
 
+    const ownerId = appData?.owner?.id;
+    const sortedProducts = [
+        ...products.filter(p => p.account?.id === ownerId),
+        ...products.filter(p => p.account?.id !== ownerId)
+    ];
+
     return (
         <>
             <div className="flex-1 p-6   ">
@@ -27,12 +33,12 @@ export default function NumbersContainter({ handleRefresh, products }: ViewProps
 
                     <div>
                         {/* <NumberItem account={appData?.owner} isOwner={true} /> */}
-                        {products?.map((product, index) => (
+                        {sortedProducts.map((product, index) => (
                             <NumberItem
                                 key={index}
                                 account={product.account}
                                 is_followed={product.is_followed}
-                                isOwner={appData?.owner?.id == product?.account?.id}
+                                isOwner={ownerId === product?.account?.id}
                             />
                         ))}
                     </div>

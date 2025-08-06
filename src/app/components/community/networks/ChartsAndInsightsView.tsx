@@ -27,13 +27,10 @@ ChartJS.register(
 );
 
 interface ViewProps {
-    chartData: any
+    chartData: any;
 }
 
-
-export default function ChartsAndInsightsView({
-    chartData
-}: ViewProps) {
+export default function ChartsAndInsightsView({ chartData }: ViewProps) {
     const data = {
         labels: chartData?.map((item: any) => item.date),
         datasets: [

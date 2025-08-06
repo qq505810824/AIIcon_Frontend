@@ -3,13 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartsAndInsightsView from './ChartsAndInsightsView';
 
 interface ViewProps {
-    data: any
+    data: any;
 }
 
-
-export default function NetworkLayoutView({
-    data
-}: ViewProps) {
+export default function NetworkLayoutView({ data }: ViewProps) {
     return (
         <>
             <div id="dashboard" className="section">
@@ -63,7 +60,9 @@ export default function NetworkLayoutView({
                             <div className="text-green-400 text-sm"> +0%</div>
                         </div>
                         <div className="text-3xl font-bold text-white mb-1">{data?.weekCount}</div>
-                        <div className="text-gray-400 text-sm">New Introductions <span className='text-xs text-gray-300'>(week)</span></div>
+                        <div className="text-gray-400 text-sm">
+                            New Introductions <span className="text-xs text-gray-300">(week)</span>
+                        </div>
                     </div>
                 </div>
 
