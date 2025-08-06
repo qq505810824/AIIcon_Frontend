@@ -162,20 +162,26 @@ export default function GoldHeaderView(props: ViewProps) {
 
                     {/* 移動端下拉選單 */}
                     <div
-                        className={` md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                        className={`flex md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                     >
-                        <div className="px-4 pt-4 pb-3 space-y-1 shadow-inner">
+                        <div className="w-full flex flex-col px-4 pt-4 pb-3 space-y-1 shadow-inner">
                             {links.map((link) => {
-                                const isActive = section == link.href;
-                                //   const isActive =
-                                // pathname === link.href ||
-                                // (pathname.startsWith(link.href) && link.href !== '/');
+                                // const isActive = section == link.href;
+                                let isActive =
+                                    pathname === link.href ||
+                                    (pathname.startsWith(link.href) && link.href !== '/');
+
+                                // console.log('pathname', pathname);
+
+                                if ((pathname == "/dashbord" || pathname == "/") && link.href == "/") {
+                                    isActive = true
+                                }
 
                                 return (
-                                    <Link
+                                    <div
                                         key={link.href}
                                         // href={link.href}
-                                        className={`block px-3 py-2 rounded-md text-base font-medium transition-colors 
+                                        className={`w-full block px-3 py-2 rounded-md text-base font-medium transition-colors 
                               ${isActive ? 'text-white bg-gold-500' : 'text-gold-400'} `}
                                         onClick={() => {
                                             showSection(link.href);
@@ -183,7 +189,7 @@ export default function GoldHeaderView(props: ViewProps) {
                                         }}
                                     >
                                         {link.label}
-                                    </Link>
+                                    </div>
                                 );
                             })}
                         </div>

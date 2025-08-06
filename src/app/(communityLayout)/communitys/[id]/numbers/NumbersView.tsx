@@ -14,8 +14,8 @@ export default function NumbersContainter({ handleRefresh, products }: ViewProps
 
     const ownerId = appData?.owner?.id;
     const sortedProducts = [
-        ...products.filter(p => p.account?.id === ownerId),
-        ...products.filter(p => p.account?.id !== ownerId)
+        ...products.filter((p) => p.account?.id === ownerId),
+        ...products.filter((p) => p.account?.id !== ownerId)
     ];
 
     return (
