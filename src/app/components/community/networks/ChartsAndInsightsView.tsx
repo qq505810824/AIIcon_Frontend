@@ -26,13 +26,20 @@ ChartJS.register(
     ChartDataLabels
 );
 
-export default function ChartsAndInsightsView(props: any) {
+interface ViewProps {
+    chartData: any
+}
+
+
+export default function ChartsAndInsightsView({
+    chartData
+}: ViewProps) {
     const data = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        labels: chartData?.map((item: any) => item.date),
         datasets: [
             {
-                label: 'Network Value ($M)',
-                data: [2.1, 2.3, 2.5, 2.4, 2.7, 2.8],
+                label: 'Contacts Growth',
+                data: chartData?.map((item: any) => item.count),
                 backgroundColor: '#D4AF37',
                 borderColor: 'rgba(212, 175,55, 0.1)',
                 borderWidth: 2,
@@ -41,6 +48,21 @@ export default function ChartsAndInsightsView(props: any) {
             }
         ]
     };
+
+    //  const data = {
+    //     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    //     datasets: [
+    //         {
+    //             label: 'Network Value ($M)',
+    //             data: [2.1, 2.3, 2.5, 2.4, 2.7, 2.8],
+    //             backgroundColor: '#D4AF37',
+    //             borderColor: 'rgba(212, 175,55, 0.1)',
+    //             borderWidth: 2,
+    //             fill: true,
+    //             tension: 0.4
+    //         }
+    //     ]
+    // };
 
     const options = {
         responsive: true,

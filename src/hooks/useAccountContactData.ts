@@ -1,5 +1,5 @@
 import { AccountCommunityModel } from '@/models/AccountCommunity';
-import { createApp, deleteApp, getAllApps } from '@/service/account_contact_server';
+import { createApp, deleteApp, getAllApps, statisticsApp } from '@/service/account_contact_server';
 
 import useSWR from 'swr';
 
@@ -24,6 +24,30 @@ export const useAccountCommunityData = (options: any) => {
 
     return {
         data: data as AccountCommunityModel[],
+        isLoading,
+        isError: error,
+        mutate
+    };
+};
+
+const appStatisticsFetcher = async (option?: any) => {
+    const { data, error } = await statisticsApp(option);
+    if (error) throw error;
+    return data || [];
+};
+
+export const useContactStatisticsData = (options?: any) => {
+    const { data, error, isLoading, mutate } = useSWR(
+        'detail_contact_statistics_' + options?.user_id,
+        () => appStatisticsFetcher(options),
+        {
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+            dedupingInterval: 20000, // 1分钟内不重复请求 
+        }
+    );
+    return {
+        data: data as any,
         isLoading,
         isError: error,
         mutate

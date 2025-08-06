@@ -79,3 +79,50 @@ export const deleteApp = async (owner: string, account: string) => {
         return { success: false, error };
     }
 };
+
+export const statisticsApp = async (options: any) => {
+    try {
+        // 总数
+        const { count: totalCount } = await supabase
+            .from('contacts')
+            .select('id', { count: 'exact', head: true })
+            .eq('owner', options?.user_id);
+
+        // 一周增量
+        const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+        const { data: weekContacts } = await supabase
+            .from('contacts')
+            .select('created_at')
+            .eq('owner', options?.user_id)
+            .gte('created_at', oneWeekAgo);
+
+        // 按天统计
+        const dateMap: Record<string, number> = {};
+        weekContacts?.forEach((c: any) => {
+            const date = c.created_at.slice(0, 10);
+            dateMap[date] = (dateMap[date] || 0) + 1;
+        });
+
+        const dates: string[] = [];
+        const counts: number[] = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+            const dateStr = d.toISOString().slice(0, 10);
+            dates.push(dateStr);
+            counts.push(dateMap[dateStr] || 0);
+        }
+
+        return {
+            data: {
+                totalCount: totalCount || 0,
+                weekCount: weekContacts?.length || 0,
+                lineChartData: dates.map((date, idx) => ({
+                    date,
+                    count: counts[idx]
+                }))
+            }
+        };
+    } catch (error) {
+        return { error };
+    }
+};

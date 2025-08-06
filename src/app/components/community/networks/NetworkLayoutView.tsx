@@ -1,7 +1,15 @@
 import { faChartLine, faHandshake, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartsAndInsightsView from './ChartsAndInsightsView';
-export default function NetworkLayoutView(props: any) {
+
+interface ViewProps {
+    data: any
+}
+
+
+export default function NetworkLayoutView({
+    data
+}: ViewProps) {
     return (
         <>
             <div id="dashboard" className="section">
@@ -20,9 +28,9 @@ export default function NetworkLayoutView(props: any) {
                                 {' '}
                                 <FontAwesomeIcon icon={faChartLine} className="text-2xl" />{' '}
                             </div>
-                            <div className="text-green-400 text-sm"> +12.5%</div>
+                            <div className="text-green-400 text-sm"> +0%</div>
                         </div>
-                        <div className="text-3xl font-bold text-white mb-1">$2.8M</div>
+                        <div className="text-3xl font-bold text-white mb-1">$0M</div>
                         <div className="text-gray-400 text- sm">Network Value</div>
                     </div>
                     <div className="bg-gray-800 rounded-xl p-6 card-hover border border-gold-400/20">
@@ -30,9 +38,9 @@ export default function NetworkLayoutView(props: any) {
                             <div className="text-gold-400">
                                 <FontAwesomeIcon icon={faUser} className="text-2xl" />{' '}
                             </div>
-                            <div className="text-green-400 text-sm"> +8.2%</div>
+                            <div className="text-green-400 text-sm"> +0%</div>
                         </div>
-                        <div className="text-3xl font-bold text-white mb-1">847</div>
+                        <div className="text-3xl font-bold text-white mb-1">{data?.totalCount}</div>
                         <div className="text-gray-400 text-sm">Active Connections</div>
                     </div>
                     <div className="bg-gray-800 rounded-xl p-6 card-hover border border-gold-400/20">
@@ -43,7 +51,7 @@ export default function NetworkLayoutView(props: any) {
                             </div>
                             <div className="text-yellow-400 text-sm">→ Stable</div>
                         </div>
-                        <div className="text-3xl font-bold text-white mb-1">94</div>
+                        <div className="text-3xl font-bold text-white mb-1">0</div>
                         <div className="text-gray-400 text-sm">Influence Score</div>
                     </div>
                     <div className="bg-gray-800 rounded-xl p-6 card-hover border border-gold-400/20">
@@ -52,14 +60,14 @@ export default function NetworkLayoutView(props: any) {
                                 {' '}
                                 <FontAwesomeIcon icon={faHandshake} className=" text-2xl" />{' '}
                             </div>
-                            <div className="text-green-400 text-sm"> +15.3%</div>
+                            <div className="text-green-400 text-sm"> +0%</div>
                         </div>
-                        <div className="text-3xl font-bold text-white mb-1">23</div>
-                        <div className="text-gray-400 text-sm">New Introductions</div>
+                        <div className="text-3xl font-bold text-white mb-1">{data?.weekCount}</div>
+                        <div className="text-gray-400 text-sm">New Introductions <span className='text-xs text-gray-300'>(week)</span></div>
                     </div>
                 </div>
 
-                <ChartsAndInsightsView />
+                <ChartsAndInsightsView chartData={data?.lineChartData} />
             </div>
         </>
     );
