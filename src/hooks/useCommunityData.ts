@@ -63,9 +63,9 @@ export const useCommunityData = (options = {}) => {
     };
 };
 
-export const useJoinCommunityData = (options = {}) => {
+export const useJoinCommunityData = (options: any) => {
     const { data, error, isLoading, mutate } = useSWR(
-        'join_communitys',
+        'join_communitys_' + options?.user_id,
         () => appsJoinFetcher(options),
         {
             revalidateOnFocus: false,
