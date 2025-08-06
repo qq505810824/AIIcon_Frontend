@@ -31,14 +31,15 @@ export default function CampaignCard({ campaign }: ViewProps) {
             finish: 'bg-red-300 text-white'
         }[status] || 'bg-blue-400 text-white';
 
+    const onClickProduct = () => {
+        router.push(`/campaigns/${campaign?.id}`)
+    }
     return (
         <>
             <div
                 key={campaign.id}
                 onClick={() => {
-                    // handleClickCourse(course)
-                    // setSelectedCourse(course);
-                    // setActiveTab({ name: 'course-detail', meta: { course } });
+                    onClickProduct()
                 }}
                 className="bg-gray-800 card-hover border border-gold-400/20 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
             >

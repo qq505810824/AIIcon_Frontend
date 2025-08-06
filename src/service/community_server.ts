@@ -197,26 +197,12 @@ export const createApp = async (appData: Omit<CommunityModel, 'id'>) => {
 export const updateApp = async (id: number, appData: Partial<CommunityModel>) => {
     try {
         let result;
-        // 如果是更新 focus，使用 RPC
-        if ('focus' in appData) {
-            const { data, error } = await supabase
-                .rpc(appData.focus == 1 ? 'increment_focus' : 'decrement_focus', { row_id: id })
-                .single();
 
-            if (error) throw error;
-            result = { data, error: null };
-        } else if ('copy' in appData) {
-            const { data, error } = await supabase.rpc('increment_copy', { row_id: id }).single();
+        const { data, error } = await supabase.from(db).update(appData).eq('id', id).select();
 
-            if (error) throw error;
-            result = { data, error: null };
-        } else {
-            // 其他更新操作保持不变
-            const { data, error } = await supabase.from(db).update(appData).eq('id', id).select();
+        if (error) throw error;
+        result = { data, error: null };
 
-            if (error) throw error;
-            result = { data, error: null };
-        }
 
         return { success: true, data: result.data };
     } catch (error) {

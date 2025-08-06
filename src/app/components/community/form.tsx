@@ -1,7 +1,7 @@
 import { useAppContext } from '@/context/app-context';
 import { useCommunityOperations } from '@/hooks/useCommunityData';
 import { CommunityModel } from '@/models/Community';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ViewProps {
     payload: any;
@@ -10,7 +10,7 @@ interface ViewProps {
 }
 
 export default function CommunityFormView({ payload, submit, cancel }: ViewProps) {
-    const { addCommunity } = useCommunityOperations();
+    const { addCommunity, updateCommunity } = useCommunityOperations();
     const { user_id } = useAppContext();
     const [submitting, setSubmitting] = useState(false);
 
@@ -26,6 +26,17 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
         events_count: 0,
         accounts_count: 1
     });
+
+    useEffect(() => {
+        if (payload) {
+            setData({
+                ...data,
+                ...payload,
+                owner: payload?.owner?.id || user_id
+            });
+        }
+        // eslint-disable-next-line
+    }, [payload]);
 
     // 在组件顶部定义可选 emoji
     const logoEmojis = [
@@ -60,11 +71,14 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
         console.log('data', data);
         console.log('payload', payload);
         setSubmitting(true);
-        const res = await addCommunity({
-            ...payload,
-            ...data
-        });
-
+        let res;
+        if (payload && payload.id) {
+            // 更新
+            res = await updateCommunity(payload?.id, data);
+        } else {
+            // 新建
+            res = await addCommunity({ ...data });
+        }
         setSubmitting(false);
         submit();
         console.log('res', res);
@@ -73,7 +87,7 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
     return (
         <>
             <div className="bg-white border rounded-lg p-6">
-                <h4 className="font-semibold  mb-4">Create Community</h4>
+                <h4 className="font-semibold  mb-4">{`${payload && payload.id ? "Edit Community" : "Create Community"}`}</h4>
                 <form onSubmit={onSubmit} className=" ">
                     <div className="space-y-4">
                         <div>
@@ -160,7 +174,7 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="bg-gold-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                                className="bg-gold-500 text-white px-4 py-2 rounded-lg hover:bg-gold-600"
                             >
                                 Comfirm
                             </button>

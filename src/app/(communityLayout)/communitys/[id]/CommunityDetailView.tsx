@@ -70,8 +70,8 @@ export default function CommunityDetailView({ community }: ViewProps) {
                     className={`bg-gradient-to-r from-${community?.theme}-500 to-${community?.theme}-600`}
                 >
                     <div className="max-w-7xl mx-auto px-2 py-4 sm:px-6 sm:py-8">
-                        <div className="flex flex-row items-center justify-between">
-                            <div className="flex items-center space-x-2 mb-6">
+                        <div className="flex flex-row items-center justify-between mb-6">
+                            <div className="flex items-center space-x-2 ">
                                 <button onClick={() => router.push('/')} className="p-2 rounded-lg">
                                     <ArrowBack className="w-5 h-5 hover:text-gold-400  " />
                                 </button>

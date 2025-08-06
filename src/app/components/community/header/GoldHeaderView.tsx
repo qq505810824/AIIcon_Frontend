@@ -76,7 +76,7 @@ export default function GoldHeaderView(props: ViewProps) {
                 />
 
                 <header
-                    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gray-800 border-b border-gold-400/20 px-4 md:px-0 py-4`}
+                    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gray-800 border-b border-gold-400/20 px-4 md:px-4 py-4`}
                 >
                     <div className="max-w-7xl mx-auto flex items-center justify-between">
                         <div className="flex items-center space-x-2 md:space-x-4">
@@ -173,8 +173,11 @@ export default function GoldHeaderView(props: ViewProps) {
 
                                 // console.log('pathname', pathname);
 
-                                if ((pathname == "/dashbord" || pathname == "/") && link.href == "/") {
-                                    isActive = true
+                                if (
+                                    (pathname == '/dashbord' || pathname == '/') &&
+                                    link.href == '/'
+                                ) {
+                                    isActive = true;
                                 }
 
                                 return (

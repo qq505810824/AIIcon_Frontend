@@ -16,6 +16,9 @@ export const getAllApps = async (options?: any) => {
         if (options && options.community_id) {
             query = query.eq('community', options.community_id);
         }
+        if (options && options.user_id) {
+            query = query.eq('owner', options.user_id);
+        }
 
         if (options && options.category) {
             query = query.eq('category', options.category);
@@ -101,9 +104,25 @@ export const getAppDetail = async (id: number, accountId?: string) => {
             throw detailResult.error;
         }
 
+        // 处理 medias 字段
+        let medias = detailResult.data?.medias;
+        if (Array.isArray(medias)) {
+            medias = medias.map((m: any) => {
+                if (typeof m === 'string') {
+                    try {
+                        return JSON.parse(m);
+                    } catch {
+                        return { name: m };
+                    }
+                }
+                return m;
+            });
+        }
+
         return {
             data: {
                 ...detailResult.data,
+                medias,
                 is_collected: collectResult ? collectResult?.data?.length > 0 : false
             },
             error: null
@@ -123,7 +142,26 @@ export const getAppDetailById = async (id: number) => {
             throw error;
         }
 
-        return { success: true, data };
+        // 处理 medias 字段
+        let medias = data?.medias;
+        if (Array.isArray(medias)) {
+            medias = medias.map((m: any) => {
+                if (typeof m === 'string') {
+                    try {
+                        return JSON.parse(m);
+                    } catch {
+                        return { name: m };
+                    }
+                }
+                return m;
+            });
+        }
+        return {
+            success: true, data: {
+                ...data,
+                medias
+            },
+        };
     } catch (error) {
         console.error('获取应用详情失败:', error);
         return { data: null, error };
