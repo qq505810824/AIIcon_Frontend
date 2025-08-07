@@ -8,9 +8,10 @@ interface ViewProps {
     account: AccountModel;
     isOwner?: boolean;
     is_followed?: boolean;
+    handleRefresh?: any
 }
 
-export default function NumberItem({ account, isOwner, is_followed }: ViewProps) {
+export default function NumberItem({ account, isOwner, is_followed, handleRefresh }: ViewProps) {
     const { user_id } = useAppContext();
     const { appData } = useAppDetailContext();
     const { focus, unfocus } = useContactOperations();
@@ -21,12 +22,13 @@ export default function NumberItem({ account, isOwner, is_followed }: ViewProps)
         if (!isFocus) {
             const res = await focus({
                 owner: user_id,
-                account: account.id,
-                source: appData.name
+                account_id: account.id,
+                source: appData?.name || 'contacts'
             });
         } else {
             await unfocus(user_id, account.id || '');
         }
+        handleRefresh && handleRefresh()
     };
 
     return (

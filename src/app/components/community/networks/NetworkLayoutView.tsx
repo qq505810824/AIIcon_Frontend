@@ -1,5 +1,7 @@
 import { faChartLine, faHandshake, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRouter } from 'next/navigation';
+import Button from '../../base/button';
 import ChartsAndInsightsView from './ChartsAndInsightsView';
 
 interface ViewProps {
@@ -7,16 +9,33 @@ interface ViewProps {
 }
 
 export default function NetworkLayoutView({ data }: ViewProps) {
+    const router = useRouter()
+    const onClickContacts = () => {
+        router.push(`/contacts`)
+    }
     return (
         <>
             <div id="dashboard" className="section">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-luxury font-bold text-gold-400 mb-2">
-                        Network Portfolio
-                    </h1>
-                    <p className="text-gray-300">
-                        Transform your connections into measurable, inheritable assets
-                    </p>
+                <div className="flex flex-row items-center  justify-between mb-8">
+                    <div>
+                        <h1 className="text-3xl font-luxury font-bold text-gold-400 mb-2">
+                            Network Portfolio
+                        </h1>
+                        <p className="text-gray-300">
+                            Transform your connections into measurable, inheritable assets
+                        </p>
+                    </div>
+                    <div>
+                        <Button
+                            type="primary"
+                            className="ml-2 px-2 cursor-pointer bg-gold-400 hover:bg-gold-500 "
+                            onClick={onClickContacts}
+                        >
+                            <label className="text-xs sm:text-sm cursor-pointer ">
+                                {'My Contacts'}
+                            </label>
+                        </Button>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div className="bg-gray-800 rounded-xl p-6 card-hover border border-gold-400/20">
@@ -67,7 +86,7 @@ export default function NetworkLayoutView({ data }: ViewProps) {
                 </div>
 
                 <ChartsAndInsightsView chartData={data?.lineChartData} />
-            </div>
+            </div >
         </>
     );
 }

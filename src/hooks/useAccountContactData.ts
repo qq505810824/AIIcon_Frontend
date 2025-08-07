@@ -1,5 +1,5 @@
 import { AccountCommunityModel } from '@/models/AccountCommunity';
-import { createApp, deleteApp, getAllApps, statisticsApp } from '@/service/account_contact_server';
+import { createApp, deleteApp, getAllApps, importApp, statisticsApp } from '@/service/account_contact_server';
 
 import useSWR from 'swr';
 
@@ -14,6 +14,25 @@ const appsFetcher = async (options?: {}) => {
 export const useAccountCommunityData = (options: any) => {
     const { data, error, isLoading, mutate } = useSWR(
         'AccountCommunitys_' + options?.community_id,
+        () => appsFetcher(options),
+        {
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+            dedupingInterval: 60000 // 1分钟内不重复请求
+        }
+    );
+
+    return {
+        data: data as AccountCommunityModel[],
+        isLoading,
+        isError: error,
+        mutate
+    };
+};
+
+export const useMyContactsData = (options: any) => {
+    const { data, error, isLoading, mutate } = useSWR(
+        'contacts_' + options?.user_id,
         () => appsFetcher(options),
         {
             revalidateOnFocus: false,
@@ -66,7 +85,13 @@ export const useContactOperations = () => {
             return await deleteApp(id, accountId);
         });
     };
-    return { focus, unfocus };
+
+    const importData = async (appData: any) => {
+        return handleAppOperation(async () => {
+            return await importApp(appData);
+        });
+    };
+    return { focus, unfocus, importData };
 };
 
 // 处理应用操作的通用函数
