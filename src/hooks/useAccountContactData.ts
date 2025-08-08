@@ -1,5 +1,11 @@
 import { AccountCommunityModel } from '@/models/AccountCommunity';
-import { createApp, deleteApp, getAllApps, importApp, statisticsApp } from '@/service/account_contact_server';
+import {
+    createApp,
+    deleteApp,
+    getAllApps,
+    importApp,
+    statisticsApp
+} from '@/service/account_contact_server';
 
 import useSWR from 'swr';
 

@@ -54,18 +54,19 @@ export default function CustomPopover({
                             {...(trigger !== 'hover'
                                 ? {}
                                 : {
-                                    onMouseLeave: () => onMouseLeave(open),
-                                    onMouseEnter: () => onMouseEnter(open)
-                                })}
+                                      onMouseLeave: () => onMouseLeave(open),
+                                      onMouseEnter: () => onMouseEnter(open)
+                                  })}
                         >
                             <Popover.Button
                                 ref={buttonRef}
-                                className={`group ${s.popupBtn} ${open ? '' : 'bg-gray-100'} ${!btnClassName
-                                    ? ''
-                                    : typeof btnClassName === 'string'
-                                        ? btnClassName
-                                        : btnClassName?.(open)
-                                    }`}
+                                className={`group ${s.popupBtn} ${open ? '' : 'bg-gray-100'} ${
+                                    !btnClassName
+                                        ? ''
+                                        : typeof btnClassName === 'string'
+                                          ? btnClassName
+                                          : btnClassName?.(open)
+                                }`}
                             >
                                 {btnElement}
                             </Popover.Button>
@@ -81,9 +82,9 @@ export default function CustomPopover({
                                     {...(trigger !== 'hover'
                                         ? {}
                                         : {
-                                            onMouseLeave: () => onMouseLeave(open),
-                                            onMouseEnter: () => onMouseEnter(open)
-                                        })}
+                                              onMouseLeave: () => onMouseLeave(open),
+                                              onMouseEnter: () => onMouseEnter(open)
+                                          })}
                                 >
                                     {({ close }) => (
                                         <div
@@ -91,9 +92,9 @@ export default function CustomPopover({
                                             {...(trigger !== 'hover'
                                                 ? {}
                                                 : {
-                                                    onMouseLeave: () => onMouseLeave(open),
-                                                    onMouseEnter: () => onMouseEnter(open)
-                                                })}
+                                                      onMouseLeave: () => onMouseLeave(open),
+                                                      onMouseEnter: () => onMouseEnter(open)
+                                                  })}
                                         >
                                             {cloneElement(
                                                 htmlContent as React.ReactElement<HtmlContentProps>,
@@ -101,8 +102,8 @@ export default function CustomPopover({
                                                     onClose: () => onMouseLeave(open),
                                                     ...(manualClose
                                                         ? {
-                                                            onClick: close
-                                                        }
+                                                              onClick: close
+                                                          }
                                                         : {})
                                                 }
                                             )}

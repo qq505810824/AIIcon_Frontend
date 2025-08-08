@@ -10,7 +10,7 @@ interface ViewProps {
 
 export default function ContactView({ handleRefresh, data }: ViewProps) {
     const [visibleCreateCommunity, setVisibleCreateCommunity] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
     const handleCreatCommunity = () => {
         setVisibleCreateCommunity(true);
     };

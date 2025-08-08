@@ -23,12 +23,9 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
     const [isModalOpen, setIsModalOpen] = useState(false); // 控制模态框的状态
     const [file, setFile] = useState<File>();
 
-
     useEffect(() => {
         if (columns && columns.length > 0) {
-
-            importToContact(columns)
-
+            importToContact(columns);
         }
     }, [columns]);
 
@@ -36,18 +33,16 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
         const newDatas = datas.map((data) => {
             return {
                 owner: user_id,
-                source: "execl",
+                source: 'execl',
                 meta: data
-            }
-
-        })
+            };
+        });
         console.log('newDatas', newDatas);
 
         const res = await importData(newDatas);
         console.log('res', res);
-        handleRefresh && handleRefresh()
-
-    }
+        handleRefresh && handleRefresh();
+    };
 
     const handleExeclFile = (file: File) => {
         const reader = new FileReader();
@@ -74,7 +69,7 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
                 });
                 return obj;
             });
-            setColumns(objects)
+            setColumns(objects);
             console.log('对象数组:', objects); // 输出所有数据
 
             // 提取头部标题
@@ -86,8 +81,6 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
             //     // handleColumns(headers);
             // }
             // handleOpenModal();
-
-
         };
         reader.readAsArrayBuffer(file); // 读取文件为 ArrayBuffer
     };
@@ -135,7 +128,7 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
             if (fileType.includes('csv')) {
                 handleCsvFile(file);
             } else {
-                handleExeclFile(file)
+                handleExeclFile(file);
             }
         }
     };
@@ -151,9 +144,7 @@ export default function ImportFromExeclButton({ handleRefresh }: ViewProps) {
                 }}
             >
                 <PlusIcon className="w-3 sm:w-4 mr-1 cursor-pointer "></PlusIcon>
-                <label className="text-xs sm:text-sm cursor-pointer ">
-                    {'Import Contacts'}
-                </label>
+                <label className="text-xs sm:text-sm cursor-pointer ">{'Import Contacts'}</label>
             </Button>
             <input
                 ref={fileRef}

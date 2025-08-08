@@ -9,10 +9,10 @@ interface ViewProps {
 }
 
 export default function NetworkLayoutView({ data }: ViewProps) {
-    const router = useRouter()
+    const router = useRouter();
     const onClickContacts = () => {
-        router.push(`/contacts`)
-    }
+        router.push(`/contacts`);
+    };
     return (
         <>
             <div id="dashboard" className="section">
@@ -86,7 +86,7 @@ export default function NetworkLayoutView({ data }: ViewProps) {
                 </div>
 
                 <ChartsAndInsightsView chartData={data?.lineChartData} />
-            </div >
+            </div>
         </>
     );
 }

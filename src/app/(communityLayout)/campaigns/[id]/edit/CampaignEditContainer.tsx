@@ -66,7 +66,7 @@ const CampaignEditContainer = () => {
                     title: '更新成功！',
                     type: 'success'
                 });
-                router.back()
+                router.back();
             }
         } catch (error) {
             setAlert({

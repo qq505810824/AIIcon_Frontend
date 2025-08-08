@@ -21,8 +21,8 @@ export default function ChannelView({ channels }: ViewProps) {
     };
 
     const showCreateChannel = () => {
-        return permissions.addChannel
-    }
+        return permissions.addChannel;
+    };
 
     return (
         <>
@@ -34,7 +34,7 @@ export default function ChannelView({ channels }: ViewProps) {
                             Admin-only channels for announcements and updates
                         </p>
                     </div>
-                    {showCreateChannel() &&
+                    {showCreateChannel() && (
                         <button
                             onClick={() => {
                                 handleCreatChannel();
@@ -44,7 +44,7 @@ export default function ChannelView({ channels }: ViewProps) {
                             <Plus className="w-4 h-4" />
                             <span>New Channel</span>
                         </button>
-                    }
+                    )}
                 </div>
 
                 {/* Channel List */}

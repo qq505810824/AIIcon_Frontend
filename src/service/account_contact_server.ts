@@ -28,9 +28,11 @@ export const getAllApps = async (options?: any) => {
         }
 
         // const { data, error } = await query;
-        query = query.order('account_id', { ascending: false, nullsFirst: false }).order(options?.order || 'created_at', {
-            ascending: options.direction == 'asc' ? true : false
-        });
+        query = query
+            .order('account_id', { ascending: false, nullsFirst: false })
+            .order(options?.order || 'created_at', {
+                ascending: options.direction == 'asc' ? true : false
+            });
 
         const { data, error } = await query;
 

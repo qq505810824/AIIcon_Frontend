@@ -35,7 +35,7 @@ function EventView(props: ViewProps) {
     const [menu, setMenu] = useState('');
     const [keyword, setKeyword] = useState('');
     const params = useParams();
-    const { permissions } = useAppDetailContext()
+    const { permissions } = useAppDetailContext();
 
     const switchMenu = (value: string) => {
         setMenu(value);
@@ -47,8 +47,8 @@ function EventView(props: ViewProps) {
     };
 
     const showCreateEvent = () => {
-        return permissions.addEvent
-    }
+        return permissions.addEvent;
+    };
     return (
         <>
             <div className="space-y-6">
@@ -59,7 +59,7 @@ function EventView(props: ViewProps) {
                             Virtual and in-person events for community members
                         </p>
                     </div>
-                    {showCreateEvent() &&
+                    {showCreateEvent() && (
                         <button
                             onClick={() => {
                                 handleCreatEvent();
@@ -69,7 +69,7 @@ function EventView(props: ViewProps) {
                             <Plus className="w-4 h-4" />
                             <span>New Event</span>
                         </button>
-                    }
+                    )}
                 </div>
 
                 {/* Event Filters */}

@@ -17,8 +17,8 @@ export default function CourseView({ courses }: ViewProps) {
     };
 
     const showCreateCourse = () => {
-        return permissions.addCourse
-    }
+        return permissions.addCourse;
+    };
 
     return (
         <>
@@ -30,7 +30,7 @@ export default function CourseView({ courses }: ViewProps) {
                             Admin-only Courses for announcements and updates
                         </p>
                     </div>
-                    {showCreateCourse() &&
+                    {showCreateCourse() && (
                         <button
                             onClick={() => {
                                 handleCreatCourse();
@@ -40,7 +40,7 @@ export default function CourseView({ courses }: ViewProps) {
                             <Plus className="w-4 h-4" />
                             <span>New Course</span>
                         </button>
-                    }
+                    )}
                 </div>
 
                 {/* Course List */}

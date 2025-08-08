@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import CampaignDetailView from './CampaignDetailView';
 
 export default function CampaignDetailContainter() {
-    const params = useParams()
+    const params = useParams();
     const { data, isLoading, isError, mutate } = useCampaignDetailByIdData(Number(params['id']));
 
     if (!data) return <Loading type="app" />;

@@ -13,11 +13,11 @@ export type AppContextValue = {
     appData: any;
     submitting?: boolean;
     permissions: {
-        isOwner: boolean
+        isOwner: boolean;
         addChannel: boolean;
         addCourse: boolean;
         addEvent: boolean;
-    }
+    };
     activeTab: {
         name: string;
         meta?: any;
@@ -42,9 +42,9 @@ const AppDetailContext = createContext<AppContextValue>({
         addEvent: false
     },
     activeTab: { name: '' },
-    setActiveTab: () => { },
+    setActiveTab: () => {},
     activeSubTab: { name: '' },
-    setActiveSubTab: () => { }
+    setActiveSubTab: () => {}
     // handleUpdateTable: () => {},
     // handleDeleteTable: () => {}
 });
@@ -74,24 +74,24 @@ export const AppDetailContextProvider: FC<AppContextProviderProps> = ({
     const [permissions, setPermissions] = useState<any>({
         addChannel: false,
         addCourse: false,
-        addEvent: false,
-    })
+        addEvent: false
+    });
 
     const [activeTab, setActiveTab] = useState<any>({ name: 'channels' });
     const [activeSubTab, setActiveSubTab] = useState<any>({ name: '' });
 
-    useEffect(() => { }, []);
+    useEffect(() => {}, []);
     useEffect(() => {
         if (data) {
             // console.log('appData data ', data);
             setAppData(data);
-            const isOwner = data.owner.id == user_id
+            const isOwner = data.owner.id == user_id;
             setPermissions({
                 isOwner: isOwner,
                 addChannel: isOwner,
                 addCourse: isOwner,
                 addEvent: isOwner
-            })
+            });
         }
     }, [data]);
 

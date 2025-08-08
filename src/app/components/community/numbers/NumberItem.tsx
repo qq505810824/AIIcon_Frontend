@@ -8,7 +8,7 @@ interface ViewProps {
     account: AccountModel;
     isOwner?: boolean;
     is_followed?: boolean;
-    handleRefresh?: any
+    handleRefresh?: any;
 }
 
 export default function NumberItem({ account, isOwner, is_followed, handleRefresh }: ViewProps) {
@@ -28,7 +28,7 @@ export default function NumberItem({ account, isOwner, is_followed, handleRefres
         } else {
             await unfocus(user_id, account.id || '');
         }
-        handleRefresh && handleRefresh()
+        handleRefresh && handleRefresh();
     };
 
     return (

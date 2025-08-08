@@ -203,7 +203,6 @@ export const updateApp = async (id: number, appData: Partial<CommunityModel>) =>
         if (error) throw error;
         result = { data, error: null };
 
-
         return { success: true, data: result.data };
     } catch (error) {
         console.error('更新应用失败:', error);
@@ -214,14 +213,14 @@ export const updateApp = async (id: number, appData: Partial<CommunityModel>) =>
 export const deleteApp = async (id: number) => {
     try {
         // 先删除关系表中的数据
-        // const { error: relError } = await supabase
-        //     .from('account_community')
-        //     .delete()
-        //     .eq('community', id);
+        const { error: relError } = await supabase
+            .from('account_community')
+            .delete()
+            .eq('community', id);
 
-        // if (relError) {
-        //     throw relError;
-        // }
+        if (relError) {
+            throw relError;
+        }
 
         const { data, error } = await supabase.from(db).delete().eq('id', id);
 

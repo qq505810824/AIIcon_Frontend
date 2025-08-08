@@ -157,10 +157,11 @@ export const getAppDetailById = async (id: number) => {
             });
         }
         return {
-            success: true, data: {
+            success: true,
+            data: {
                 ...data,
                 medias
-            },
+            }
         };
     } catch (error) {
         console.error('获取应用详情失败:', error);

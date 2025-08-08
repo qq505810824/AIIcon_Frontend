@@ -20,8 +20,8 @@ interface ViewProps {
 export default function CampaignDetailView({ product }: ViewProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const { deleteCampaign } = useCampaignOperations()
-    const { setShowConfirmDelete } = useModalContext()
+    const { deleteCampaign } = useCampaignOperations();
+    const { setShowConfirmDelete } = useModalContext();
 
     useEffect(() => {
         if (product) {
@@ -50,7 +50,7 @@ export default function CampaignDetailView({ product }: ViewProps) {
         }[status] || 'bg-blue-400 text-white';
 
     const handleEdit = () => {
-        router.push(`/campaigns/${product.id}/edit`)
+        router.push(`/campaigns/${product.id}/edit`);
     };
     const Operations = (props: HtmlContentProps) => {
         const onMouseLeave = async () => {
@@ -60,7 +60,7 @@ export default function CampaignDetailView({ product }: ViewProps) {
             e.stopPropagation();
             props.onClick?.();
             e.preventDefault();
-            handleEdit()
+            handleEdit();
         };
         const onClickDelete = async (e: React.MouseEvent<HTMLDivElement>) => {
             e.stopPropagation();
@@ -68,15 +68,14 @@ export default function CampaignDetailView({ product }: ViewProps) {
             e.preventDefault();
 
             setShowConfirmDelete({
-                payload: {
-                },
+                payload: {},
                 onSaveCallback: async () => {
                     const res = await deleteCampaign(product?.id || 0);
                     Toast.notify({
                         type: 'success',
                         message: 'Successful!'
-                    })
-                    router.push('/campaigns')
+                    });
+                    router.push('/campaigns');
                 }
             });
         };
@@ -105,21 +104,17 @@ export default function CampaignDetailView({ product }: ViewProps) {
         );
     };
 
-
     if (!product) return <Loading type="app" />;
 
     return (
         <div className="flex-1 p-6">
-
             <div className="max-w-7xl mx-auto px-2 py-4 sm:px-6 sm:py-8">
-                <div className='flex flex-row items-center justify-between'>
+                <div className="flex flex-row items-center justify-between">
                     <div className="flex items-center space-x-2 ">
                         <button onClick={() => router.back()} className="p-2 rounded-lg">
                             <ArrowBack className="w-5 h-5 hover:text-gold-400  " />
                         </button>
-                        <h1 className="text-xl sm:text-3xl font-bold">
-                            {product?.name || '--'}
-                        </h1>
+                        <h1 className="text-xl sm:text-3xl font-bold">{product?.name || '--'}</h1>
                         <div
                             className={`flex items-center space-x-1 rounded-full px-2 py-1 ${statusStyle}`}
                         >
@@ -154,15 +149,10 @@ export default function CampaignDetailView({ product }: ViewProps) {
                             className="!w-[200px] h-fit !z-20"
                         />
                     </div>
-
-
-
                 </div>
 
                 <div className="flex items-center mt-4 ">
-                    <span className="text-sm sm:text-md text-gray-300">
-                        {product.description}
-                    </span>
+                    <span className="text-sm sm:text-md text-gray-300">{product.description}</span>
                 </div>
                 <div className="flex flex-col mt-4 text-sm space-y-2 text-gray-300">
                     <span>
@@ -185,7 +175,6 @@ export default function CampaignDetailView({ product }: ViewProps) {
                         <div className="mb-6">
                             <span className="font-semibold text-gray-300">Press Release:</span>
                             <ContentView content={product?.press_release || ''} />
-
                         </div>
                     )}
                     {product.files_url && (
@@ -193,8 +182,16 @@ export default function CampaignDetailView({ product }: ViewProps) {
                             <span className="font-semibold text-gray-300">Images:</span>
                             <div className="mt-2  space-x-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                                 {/* 假设 files_url 是图片链接数组或逗号分隔字符串 */}
-                                {(Array.isArray(product.files_url) ? product.files_url : String(product.files_url).split(',')).map((url: string, idx: number) => (
-                                    <img key={idx} src={url} alt="展会图片" className=" object-cover rounded border" />
+                                {(Array.isArray(product.files_url)
+                                    ? product.files_url
+                                    : String(product.files_url).split(',')
+                                ).map((url: string, idx: number) => (
+                                    <img
+                                        key={idx}
+                                        src={url}
+                                        alt="展会图片"
+                                        className=" object-cover rounded border"
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -204,13 +201,12 @@ export default function CampaignDetailView({ product }: ViewProps) {
                             <span className="font-semibold text-gray-300">Promoto Channel:</span>
                             <div className="mt-2 flex flex-col flex-wrap gap-2">
                                 {product.medias.map((media: any, idx: number) => {
-
                                     return (
                                         <span
                                             key={idx}
                                             className="text-gray-400  text-sm font-medium  "
                                         >
-                                            {idx + 1}:  {media.name || '--'}
+                                            {idx + 1}: {media.name || '--'}
                                         </span>
                                     );
                                 })}

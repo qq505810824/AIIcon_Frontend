@@ -32,14 +32,14 @@ export default function CampaignCard({ campaign }: ViewProps) {
         }[status] || 'bg-blue-400 text-white';
 
     const onClickProduct = () => {
-        router.push(`/campaigns/${campaign?.id}`)
-    }
+        router.push(`/campaigns/${campaign?.id}`);
+    };
     return (
         <>
             <div
                 key={campaign.id}
                 onClick={() => {
-                    onClickProduct()
+                    onClickProduct();
                 }}
                 className="bg-gray-800 card-hover border border-gold-400/20 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
             >

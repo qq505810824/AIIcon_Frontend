@@ -87,7 +87,7 @@ export default function CommunityFormView({ payload, submit, cancel }: ViewProps
     return (
         <>
             <div className="bg-white border rounded-lg p-6">
-                <h4 className="font-semibold  mb-4">{`${payload && payload.id ? "Edit Community" : "Create Community"}`}</h4>
+                <h4 className="font-semibold  mb-4">{`${payload && payload.id ? 'Edit Community' : 'Create Community'}`}</h4>
                 <form onSubmit={onSubmit} className=" ">
                     <div className="space-y-4">
                         <div>

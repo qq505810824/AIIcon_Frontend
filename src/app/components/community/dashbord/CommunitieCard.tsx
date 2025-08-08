@@ -1,10 +1,8 @@
 import { useAppContext } from '@/context/app-context';
+import { useModalContext } from '@/context/modal-context';
+import { useCommunityOperations } from '@/hooks/useCommunityData';
 import { CommunityModel } from '@/models/Community';
-import {
-    ClipboardDocumentIcon,
-    PencilSquareIcon,
-    TrashIcon
-} from '@heroicons/react/24/outline';
+import { ClipboardDocumentIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import copy from 'copy-to-clipboard';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -12,12 +10,12 @@ import { useState } from 'react';
 import { useContext } from 'use-context-selector';
 import Modal from '../../base/modal';
 import CustomPopover, { HtmlContentProps } from '../../base/popover';
-import { ToastContext } from '../../base/toast';
+import Toast, { ToastContext } from '../../base/toast';
 import CommunityFormView from '../form';
 
 interface ViewProps {
     community: CommunityModel;
-    handleRefresh?: any
+    handleRefresh?: any;
 }
 
 export default function CommunitieCard({ community, handleRefresh }: ViewProps) {
@@ -25,6 +23,8 @@ export default function CommunitieCard({ community, handleRefresh }: ViewProps) 
     const { notify } = useContext(ToastContext);
     const { user_id } = useAppContext();
     const [isCopied, setIsCopied] = useState(false);
+    const { setShowConfirmDelete } = useModalContext();
+    const { deleteCommunity } = useCommunityOperations()
 
     const [visibleCreateCommunity, setVisibleCreateCommunity] = useState(false);
     const handleEdit = () => {
@@ -54,14 +54,25 @@ export default function CommunitieCard({ community, handleRefresh }: ViewProps) 
             e.stopPropagation();
             props.onClick?.();
             e.preventDefault();
-            handleEdit()
+            handleEdit();
         };
         const onClickDelete = async (e: React.MouseEvent<HTMLDivElement>) => {
             e.stopPropagation();
             props.onClick?.();
             e.preventDefault();
 
-            // setShowConfirmDelete(true);
+
+            setShowConfirmDelete({
+                payload: {},
+                onSaveCallback: async () => {
+                    const res = await deleteCommunity(community?.id || 0);
+                    Toast.notify({
+                        type: 'success',
+                        message: 'Successful!'
+                    });
+                    handleRefresh && handleRefresh()
+                }
+            });
         };
         return (
             <div
@@ -96,19 +107,17 @@ export default function CommunitieCard({ community, handleRefresh }: ViewProps) 
                 className="w-full rounded-xl   hover:shadow-md transition-all duration-200 overflow-hidden"
             >
                 <div className="bg-gray-800   rounded-xl shadow-sm border border-gold-400/20 p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer">
-                    <div className=' flex flex-row  justify-between'>
+                    <div className=" flex flex-row  justify-between">
                         <div className="flex  items-center space-x-3 mb-4">
-                            <div className=''>
+                            <div className="">
                                 <div
                                     className={`w-10 h-10  md:w-12 md:h-12 bg-${community.theme}-100 rounded-full flex items-center justify-center text-xl`}
                                 >
                                     {community.logo}
                                 </div>
                             </div>
-                            <div className='flex flex-wrap flex-col space-y-1'>
-                                <h3 className="font-semibold text-white  ">
-                                    {community.name}
-                                </h3>
+                            <div className="flex flex-wrap flex-col space-y-1">
+                                <h3 className="font-semibold text-white  ">{community.name}</h3>
                                 <div>
                                     {isOwner() && (
                                         <span className="bg-gold-500  px-2 py-1 rounded-full text-xs">
@@ -120,7 +129,6 @@ export default function CommunitieCard({ community, handleRefresh }: ViewProps) 
                                     {community.accounts_count} members
                                 </p>
                             </div>
-
                         </div>
                         <div>
                             {isOwner() && (

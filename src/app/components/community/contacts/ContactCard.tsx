@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import NumberItem from '../numbers/NumberItem';
 
 interface ViewProps {
-    product: any
+    product: any;
     handleRefresh?: any;
 }
 
@@ -12,7 +12,13 @@ export default function ContactCard({ product, handleRefresh }: ViewProps) {
     const { activeTab, setActiveTab } = useAppDetailContext();
 
     if (product?.account) {
-        return <NumberItem account={product.account} is_followed={true} handleRefresh={handleRefresh} />
+        return (
+            <NumberItem
+                account={product.account}
+                is_followed={true}
+                handleRefresh={handleRefresh}
+            />
+        );
     }
 
     return (
@@ -27,8 +33,11 @@ export default function ContactCard({ product, handleRefresh }: ViewProps) {
             >
                 {Object.keys(product?.meta).map((key, index) => {
                     return (
-                        <div key={index}><label className='text-gray-300 mr-2'>{key}:</label> {product?.meta[key]}</div>
-                    )
+                        <div key={index}>
+                            <label className="text-gray-300 mr-2">{key}:</label>{' '}
+                            {product?.meta[key]}
+                        </div>
+                    );
                 })}
             </div>
         </>
