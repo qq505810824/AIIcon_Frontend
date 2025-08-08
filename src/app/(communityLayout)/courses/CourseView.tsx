@@ -11,10 +11,14 @@ interface ViewProps {
 export default function CourseView({ courses }: ViewProps) {
     const router = useRouter();
     const params = useParams();
-    const { activeTab, setActiveTab } = useAppDetailContext();
+    const { activeTab, setActiveTab, permissions } = useAppDetailContext();
     const handleCreatCourse = () => {
         router.push(`/courses/create?community_id=${params['id']}`);
     };
+
+    const showCreateCourse = () => {
+        return permissions.addCourse
+    }
 
     return (
         <>
@@ -26,15 +30,17 @@ export default function CourseView({ courses }: ViewProps) {
                             Admin-only Courses for announcements and updates
                         </p>
                     </div>
-                    <button
-                        onClick={() => {
-                            handleCreatCourse();
-                        }}
-                        className="bg-gold-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
-                    >
-                        <Plus className="w-4 h-4" />
-                        <span>New Course</span>
-                    </button>
+                    {showCreateCourse() &&
+                        <button
+                            onClick={() => {
+                                handleCreatCourse();
+                            }}
+                            className="bg-gold-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
+                        >
+                            <Plus className="w-4 h-4" />
+                            <span>New Course</span>
+                        </button>
+                    }
                 </div>
 
                 {/* Course List */}

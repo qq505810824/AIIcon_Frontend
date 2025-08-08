@@ -13,12 +13,16 @@ export default function ChannelView({ channels }: ViewProps) {
     const router = useRouter();
     const params = useParams();
 
-    const { activeTab, setActiveTab } = useAppDetailContext();
+    const { activeTab, setActiveTab, permissions } = useAppDetailContext();
 
     const [selectedChannel, setSelectedChannel] = useState<any>(null);
     const handleCreatChannel = () => {
         router.push(`/channels/create?community_id=${params['id']}`);
     };
+
+    const showCreateChannel = () => {
+        return permissions.addChannel
+    }
 
     return (
         <>
@@ -30,15 +34,17 @@ export default function ChannelView({ channels }: ViewProps) {
                             Admin-only channels for announcements and updates
                         </p>
                     </div>
-                    <button
-                        onClick={() => {
-                            handleCreatChannel();
-                        }}
-                        className="bg-gold-500 text-white text-sm px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
-                    >
-                        <Plus className="w-4 h-4" />
-                        <span>New Channel</span>
-                    </button>
+                    {showCreateChannel() &&
+                        <button
+                            onClick={() => {
+                                handleCreatChannel();
+                            }}
+                            className="bg-gold-500 text-white text-sm px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
+                        >
+                            <Plus className="w-4 h-4" />
+                            <span>New Channel</span>
+                        </button>
+                    }
                 </div>
 
                 {/* Channel List */}

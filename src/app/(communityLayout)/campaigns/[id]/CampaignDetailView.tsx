@@ -1,6 +1,10 @@
+import Divider from '@/app/components/base/divider';
 import Loading from '@/app/components/base/loading';
 import CustomPopover, { HtmlContentProps } from '@/app/components/base/popover';
+import Toast from '@/app/components/base/toast';
 import ContentView from '@/app/components/common/Views/ContentView';
+import { useModalContext } from '@/context/modal-context';
+import { useCampaignOperations } from '@/hooks/useCampaignData';
 import { CampaignModel } from '@/models/Campaign';
 import { faCalendar, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +20,8 @@ interface ViewProps {
 export default function CampaignDetailView({ product }: ViewProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { deleteCampaign } = useCampaignOperations()
+    const { setShowConfirmDelete } = useModalContext()
 
     useEffect(() => {
         if (product) {
@@ -61,7 +67,18 @@ export default function CampaignDetailView({ product }: ViewProps) {
             props.onClick?.();
             e.preventDefault();
 
-            // setShowConfirmDelete(true);
+            setShowConfirmDelete({
+                payload: {
+                },
+                onSaveCallback: async () => {
+                    const res = await deleteCampaign(product?.id || 0);
+                    Toast.notify({
+                        type: 'success',
+                        message: 'Successful!'
+                    })
+                    router.push('/campaigns')
+                }
+            });
         };
         return (
             <div
@@ -76,9 +93,9 @@ export default function CampaignDetailView({ product }: ViewProps) {
                     <span className="text-gray-700 text-sm font-medium">Edit</span>
                 </button>
 
-                {/* <Divider className="!my-1" /> */}
+                <Divider className="!my-1" />
                 <div
-                    className="hidden h-10 py-2 px-3 mx-1 flex items-center gap-2 rounded-lg cursor-pointer hover:bg-red-50 transition-colors"
+                    className="h-10 py-2 px-3 mx-1 flex items-center gap-2 rounded-lg cursor-pointer hover:bg-red-50 transition-colors"
                     onClick={onClickDelete}
                 >
                     <TrashIcon className="w-4 h-4 text-red-500" />

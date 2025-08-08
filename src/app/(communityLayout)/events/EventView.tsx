@@ -4,6 +4,7 @@ import { CalendarCategorys } from '@/utils/constant';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useAppDetailContext } from '../communitys/[id]/detail-context';
 
 interface ViewProps {
     data: any;
@@ -34,6 +35,7 @@ function EventView(props: ViewProps) {
     const [menu, setMenu] = useState('');
     const [keyword, setKeyword] = useState('');
     const params = useParams();
+    const { permissions } = useAppDetailContext()
 
     const switchMenu = (value: string) => {
         setMenu(value);
@@ -44,6 +46,9 @@ function EventView(props: ViewProps) {
         router.push(`/events/create?community_id=${params['id']}`);
     };
 
+    const showCreateEvent = () => {
+        return permissions.addEvent
+    }
     return (
         <>
             <div className="space-y-6">
@@ -54,15 +59,17 @@ function EventView(props: ViewProps) {
                             Virtual and in-person events for community members
                         </p>
                     </div>
-                    <button
-                        onClick={() => {
-                            handleCreatEvent();
-                        }}
-                        className="bg-gold-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
-                    >
-                        <Plus className="w-4 h-4" />
-                        <span>New Event</span>
-                    </button>
+                    {showCreateEvent() &&
+                        <button
+                            onClick={() => {
+                                handleCreatEvent();
+                            }}
+                            className="bg-gold-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-gold-600 flex items-center space-x-2 whitespace-nowrap"
+                        >
+                            <Plus className="w-4 h-4" />
+                            <span>New Event</span>
+                        </button>
+                    }
                 </div>
 
                 {/* Event Filters */}
