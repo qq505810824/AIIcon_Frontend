@@ -1,15 +1,46 @@
 import { useAppDetailContext } from '@/app/(communityLayout)/communitys/[id]/detail-context';
+import { useModalContext } from '@/context/modal-context';
+import { useCourseOperations } from '@/hooks/useCourseData';
 import { CourseModel } from '@/models/Course';
 import { Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Toast from '../../base/toast';
+import OperationsView from '../../common/Views/OperationsView';
 
 interface ViewProps {
     course: CourseModel;
+    handleRefresh?: any;
 }
 
-export default function CourseCard({ course }: ViewProps) {
+export default function CourseCard({ course, handleRefresh }: ViewProps) {
     const router = useRouter();
-    const { activeTab, setActiveTab } = useAppDetailContext();
+    const { setShowConfirmDelete } = useModalContext();
+    const { activeTab, setActiveTab, permissions } = useAppDetailContext();
+    const { deleteCourse } = useCourseOperations()
+
+    const handleEdit = () => {
+        router.push(`/courses/${course.id}/edit`)
+
+    }
+
+    const handleDelete = () => {
+        setShowConfirmDelete({
+            payload: {},
+            onSaveCallback: async () => {
+                const res = await deleteCourse(course?.id || 0);
+                Toast.notify({
+                    type: 'success',
+                    message: 'Successful!'
+                });
+                handleRefresh && handleRefresh()
+            }
+        });
+    }
+
+    const showEditCourse = () => {
+        return permissions && permissions.addCourse
+    }
+
     return (
         <>
             <div
@@ -19,7 +50,7 @@ export default function CourseCard({ course }: ViewProps) {
                     // setSelectedCourse(course);
                     setActiveTab({ name: 'course-detail', meta: { course } });
                 }}
-                className="bg-gray-800 card-hover border border-gold-400/20 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-gray-800 relative card-hover border border-gold-400/20 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
             >
                 <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                     {/* bg-gradient-to-br from-blue-100 to-purple-100  */}
@@ -32,6 +63,15 @@ export default function CourseCard({ course }: ViewProps) {
                         />
                     )}
                 </div>
+                {showEditCourse() &&
+                    <div className=' absolute right-1 top-1'>
+                        <OperationsView {...{
+                            btnClassName: 'bg-white',
+                            handleDelete,
+                            handleEdit
+                        }} />
+                    </div>
+                }
 
                 <div className="p-6">
                     <div className="flex items-center justify-between mb-2">

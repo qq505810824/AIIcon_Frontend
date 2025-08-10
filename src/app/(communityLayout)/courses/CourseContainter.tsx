@@ -16,12 +16,17 @@ export default function CourseContainter() {
         }
     }, [params]);
 
+    const handleRefresh = () => {
+        mutate();
+    };
+
     if (isLoading) return <Loading type="app" />;
     return (
         <>
             <CourseView
                 {...{
-                    courses: data
+                    courses: data,
+                    handleRefresh
                 }}
             />
         </>
